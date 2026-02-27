@@ -1,19 +1,68 @@
-# React + TypeScript + Vite
+# Custom-Components Library
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Custom-Components** is a React component library built with TypeScript and Vite.  It provides a collection of reusable UI elements and helpers designed to
+accelerate development across multiple projects while maintaining consistency
+and theming support.
 
-Currently, two official plugins are available:
+## 🚀 Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The repository contains a set of foundational components (buttons, inputs,
+modals, navigation, etc.) along with utility hooks, context providers, and
+theming infrastructure.  It’s structured for easy consumption by other
+applications and can be published to npm or linked locally during development.
 
-## React Compiler
+Key features include:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Fully typed React components (`.tsx`) and custom hooks.
+- Light/dark theme toggling managed via context and CSS variables.
+- A modular folder layout separating `components`, `hooks`, `pages`, and
+  `layouts` for clarity.
+- ESLint and TypeScript configuration optimized for strict typing and
+  developer productivity.
 
-## Expanding the ESLint configuration
+## 📁 Repository Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```
+src/
+  components/       # Shared UI components (Navbar, Sidebar, Input, ThemeToggle)
+    Reusable/
+    Ui/
+  context/          # Context providers (e.g. theme.store.ts)
+  hooks/            # Custom hooks used across components
+  layouts/          # Layout components for pages and dashboards
+  pages/            # Example/demo pages for the component library
+  themes/           # Color definitions and CSS variables
+  utils/            # Utility functions and helpers
+  types/            # Shared TypeScript types
+```
+
+## 🛠 Getting Started
+
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+2. **Run development server**
+   ```bash
+   npm run dev
+   ```
+
+3. **Build for production**
+   ```bash
+   npm run build
+   ```
+
+4. **Lint and format**
+   ```bash
+   npm run lint
+   npm run format
+   ```
+
+## 📚 ESLint Configuration
+
+The project uses a custom ESLint setup tailored for TypeScript and React. You
+can expand or modify the rules in `eslint.config.js` as needed.  For example:
 
 ```js
 export default defineConfig([
@@ -21,53 +70,33 @@ export default defineConfig([
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
       tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
       tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
       tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
     ],
     languageOptions: {
       parserOptions: {
         project: ['./tsconfig.node.json', './tsconfig.app.json'],
         tsconfigRootDir: import.meta.dirname,
       },
-      // other options...
     },
   },
 ])
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Optional plugins for more React-specific rules:
 
 ```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+import reactX from 'eslint-plugin-react-x';
+import reactDom from 'eslint-plugin-react-dom';
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+// ... in config
+extends: [
+  reactX.configs['recommended-typescript'],
+  reactDom.configs.recommended,
+],
 ```
+
+---
+
+Feel free to customize and expand this library according to your needs!
